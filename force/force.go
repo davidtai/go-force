@@ -56,6 +56,36 @@ func Create(version, clientId, clientSecret, userName, password, securityToken,
 	return forceApi, nil
 }
 
+func Set(accessToken, instanceUrl, id, issuedAt, signature string) (*ForceApi, error) {
+	oauth := &forceOauth{
+		AccessToken: accessToken,
+		InstanceUrl: instanceUrl,
+		Id:          id,
+		IssuedAt:    issuedAt,
+		Signature:   signature,
+	}
+
+	forceApi := &ForceApi{
+		apiResources:           make(map[string]string),
+		apiSObjects:            make(map[string]*SObjectMetaData),
+		apiSObjectDescriptions: make(map[string]*SObjectDescription),
+		apiVersion:             version,
+		oauth:                  oauth,
+	}
+
+	// Init Api Resources
+	err = forceApi.getApiResources()
+	if err != nil {
+		return nil, err
+	}
+	err = forceApi.getApiSObjects()
+	if err != nil {
+		return nil, err
+	}
+
+	return forceApi, nil
+}
+
 // Used when running tests.
 func createTest() *ForceApi {
 	forceApi, err := Create(testVersion, testClientId, testClientSecret, testUserName, testPassword, testSecurityToken, testEnvironment)
