@@ -44,11 +44,11 @@ func Create(version, clientId, clientSecret, userName, password, securityToken,
 	}
 
 	// Init Api Resources
-	err = forceApi.getApiResources()
+	err = forceApi.GetApiResources()
 	if err != nil {
 		return nil, err
 	}
-	err = forceApi.getApiSObjects()
+	err = forceApi.GetApiSObjects()
 	if err != nil {
 		return nil, err
 	}
@@ -74,11 +74,11 @@ func Set(accessToken, instanceUrl, id, issuedAt, signature string) (*ForceApi, e
 	}
 
 	// Init Api Resources
-	err = forceApi.getApiResources()
+	err = forceApi.GetApiResources()
 	if err != nil {
 		return nil, err
 	}
-	err = forceApi.getApiSObjects()
+	err = forceApi.GetApiSObjects()
 	if err != nil {
 		return nil, err
 	}

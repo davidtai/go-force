@@ -163,13 +163,13 @@ type ChildRelationship struct {
 	RelationshipName    string `json:"relationshipName"`
 }
 
-func (forceApi *ForceApi) getApiResources() error {
+func (forceApi *ForceApi) GetApiResources() error {
 	uri := fmt.Sprintf(resourcesUri, forceApi.apiVersion)
 
 	return forceApi.get(uri, nil, &forceApi.apiResources)
 }
 
-func (forceApi *ForceApi) getApiSObjects() error {
+func (forceApi *ForceApi) GetApiSObjects() error {
 	uri := forceApi.apiResources[sObjectsKey]
 
 	list := &SObjectApiResponse{}
@@ -188,7 +188,7 @@ func (forceApi *ForceApi) getApiSObjects() error {
 	return nil
 }
 
-func (forceApi *ForceApi) getApiSObjectDescriptions() error {
+func (forceApi *ForceApi) GetApiSObjectDescriptions() error {
 	for name, metaData := range forceApi.apiSObjects {
 		uri := metaData.URLs[sObjectDescribeKey]
 
