@@ -74,7 +74,7 @@ func Set(accessToken, instanceUrl, id, issuedAt, signature string) (*ForceApi, e
 	}
 
 	// Init Api Resources
-	err = forceApi.GetApiResources()
+	err := forceApi.GetApiResources()
 	if err != nil {
 		return nil, err
 	}
