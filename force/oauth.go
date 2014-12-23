@@ -9,8 +9,6 @@ import (
 	"strings"
 )
 
-var HttpClient *http.Client
-
 const (
 	grantType    = "password"
 	loginUri     = "https://login.salesforce.com/services/oauth2/token"

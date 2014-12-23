@@ -11,6 +11,8 @@ import (
 	"github.com/nimajalali/go-force/forcejson"
 )
 
+var HttpClient *http.Client
+
 const (
 	version      = "1.0.0"
 	userAgent    = "go-force/" + version
@@ -74,7 +76,7 @@ func (forceApi *ForceApi) request(method, path string, params url.Values, payloa
 
 	// Send
 	forceApi.traceRequest(req)
-	resp, err := http.DefaultClient.Do(req)
+	resp, err := HttpClient.Do(req)
 	if err != nil {
 		return fmt.Errorf("Error sending %v request: %v", method, err)
 	}
