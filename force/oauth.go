@@ -9,6 +9,8 @@ import (
 	"strings"
 )
 
+var HttpClient *http.Client
+
 const (
 	grantType    = "password"
 	loginUri     = "https://login.salesforce.com/services/oauth2/token"
@@ -79,7 +81,11 @@ func (oauth *forceOauth) Authenticate() error {
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	req.Header.Set("Accept", responseType)
 
-	resp, err := http.DefaultClient.Do(req)
+	if HttpClient == nil {
+		HttpClient = http.DefaultClient
+	}
+
+	resp, err := HttpClient.Do(req)
 	if err != nil {
 		return fmt.Errorf("Error sending authentication request: %v", err)
 	}
