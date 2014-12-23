@@ -46,6 +46,7 @@ func Create(version, clientId, clientSecret, userName, password, securityToken,
 	// Init Api Resources
 	err = forceApi.GetApiResources()
 	if err != nil {
+		
 		return nil, err
 	}
 	err = forceApi.GetApiSObjects()
@@ -76,10 +77,12 @@ func Set(accessToken, instanceUrl, id, issuedAt, signature string) (*ForceApi, e
 	// Init Api Resources
 	err := forceApi.GetApiResources()
 	if err != nil {
+		fmt.Printf("Unable to get api resources: %v", err)
 		return nil, err
 	}
 	err = forceApi.GetApiSObjects()
 	if err != nil {
+		fmt.Printf("Unable to get api sobjects: %v", err)
 		return nil, err
 	}
 
